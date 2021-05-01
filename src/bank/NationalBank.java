@@ -24,17 +24,17 @@ public class NationalBank {
     }
 
     //TODO: implement the method
-    public Bank getByName(String name) throws BankNotFoundException {
-            Bank bank = null;
-            for (int i = 0; i < banks.size(); i++) {
-                if (banks.get(i).getName().equals(name)) {
-                    bank = banks.get(i);
-                }
+    public Bank getByName(String name) throws BankNotFoundException{
+        Bank bank = null;
+        for (int i = 0; i < banks.size(); i++) {
+            if (banks.get(i).getName().equals(name)) {
+                bank = banks.get(i);
             }
-            if(bank.equals(null)){
-                throw new BankNotFoundException("bank doesn't exist!");
-            }else{
-                return bank;
-            }
+        }
+        if(bank.equals(null)){
+            throw new BankNotFoundException("bank doesn't exist");
+        }else{
+            return bank;
+        }
     }
 }

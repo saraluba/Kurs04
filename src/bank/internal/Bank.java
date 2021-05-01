@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Bank{
     private final String name;
-    private final List<Account> accounts;
+    private List<Account> accounts;
 
     public Bank(String name) {
         this.name = name;
@@ -18,6 +18,11 @@ public class Bank{
 
     public void createDepositAccount(String accountNumber, BigDecimal balance, double percents){
         DepositAccount i = new DepositAccount(accountNumber, balance, percents);
+        accounts.add(i);
+    }
+
+    public void createCreditAccount(String accountNumber, BigDecimal balance, double percents, BigDecimal creditLimit){
+        CreditAccount i = new CreditAccount(accountNumber, balance, percents, creditLimit);
         accounts.add(i);
     }
 
