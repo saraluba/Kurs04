@@ -1,6 +1,7 @@
 package bank;
 
 import bank.internal.Bank;
+import bank.internal.BankNotFoundException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,13 +24,17 @@ public class NationalBank {
     }
 
     //TODO: implement the method
-    public Bank getByName(String name) {
-        int j = 0;
-        for (int i = 0; i < banks.size(); i++) {
-            if(banks.get(i).getName().equals(name)){
-                j = i;
+    public Bank getByName(String name) throws BankNotFoundException {
+            Bank bank = null;
+            for (int i = 0; i < banks.size(); i++) {
+                if (banks.get(i).getName().equals(name)) {
+                    bank = banks.get(i);
+                }
             }
-        }
-        return banks.get(j);
+            if(bank.equals(null)){
+                throw new BankNotFoundException("bank doesn't exist!");
+            }else{
+                return bank;
+            }
     }
 }

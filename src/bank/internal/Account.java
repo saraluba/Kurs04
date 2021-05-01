@@ -3,14 +3,14 @@ package bank.internal;
 import java.math.BigDecimal;
 
 abstract class Account {
-    private final String accountNumber;
-    private BigDecimal balance;
-    private double percents;
+    protected final String accountNumber;
+    protected BigDecimal balance;
+    protected double percents;
 
-    Account(String accountNumber) {
+    Account(String accountNumber, BigDecimal balance, double percents) {
         this.accountNumber = accountNumber;
-        balance = BigDecimal.ZERO;
-        percents = 0.0;
+        this.balance = balance;
+        this.percents = percents;
     }
 
     abstract void recalculatePercents();
