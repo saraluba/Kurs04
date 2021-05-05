@@ -8,20 +8,20 @@ import java.util.HashMap;
 public class CreditAccount extends Account{
     protected final BigDecimal creditLimit;
     protected HashMap<String, String> transactionHistory;
+    Integer i;
 
     public CreditAccount(String accountNumber, BigDecimal balance, double percents, BigDecimal creditLimit) {
         super(accountNumber, balance, percents);
         this.creditLimit = creditLimit;
         this.transactionHistory = new HashMap<>();
+        this.i = 1;
     }
 
     @Override
     void topUp(BigDecimal amount) {
         super.topUp(amount);
-        LocalDateTime time = LocalDateTime.now();
-        DateTimeFormatter date = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-        String formattedDate = time.format(date);
-        transactionHistory.put(formattedDate, "top up: " + amount + ". Balance after: " + balance);
+        transactionHistory.put(i.toString() + ". " + LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")), "top up: +" + amount +". Balance after:"+ balance);
+        i++;
     }
 
     @Override
@@ -30,10 +30,8 @@ public class CreditAccount extends Account{
             throw new IllegalArgumentException("Balance can not be less than credit limit!");
         } else{
             super.withDraw(amount);
-            LocalDateTime time = LocalDateTime.now();
-            DateTimeFormatter date = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-            String formattedDate = time.format(date);
-            transactionHistory.put(formattedDate, "withdraw: -" + amount +". Balance after:"+ balance);
+            transactionHistory.put(i.toString() + ". " + LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")), "withdraw: -" + amount +". Balance after:"+ balance);
+            i++;
         }
     }
 
@@ -42,10 +40,7 @@ public class CreditAccount extends Account{
     void recalculatePercents() {
         if(balance.compareTo(BigDecimal.valueOf(0)) == -1){
             balance = balance.subtract(balance.multiply(BigDecimal.valueOf(percents/100)));
-            LocalDateTime time = LocalDateTime.now();
-            DateTimeFormatter date = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-            String formattedDate = time.format(date);
-            transactionHistory.put(formattedDate, "Apply percents");
+            transactionHistory.put(i.toString() + ". " + LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")), "apply percents");
         }
     }
 
