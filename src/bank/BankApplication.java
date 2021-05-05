@@ -15,8 +15,19 @@ public class BankApplication {
     public static void main(String[] args) throws AccountNotFoundException {
         //TODO: Get a bank from NB, and play around with money on it's accounts.
         Bank pko = new Bank("PKO");
-        pko.createDepositAccount("12345",BigDecimal.valueOf(1000),0.5);
-        pko.createCreditAccount("13456", BigDecimal.valueOf(1000), 2, BigDecimal.valueOf(1500));
-        System.out.println(pko.getAccount("12345"));
+        pko.createDepositAccount(new DepositAccount("12345", BigDecimal.valueOf(1000),0.5));
+        pko.createCreditAccount(new CreditAccount("13456", BigDecimal.valueOf(1000), 2, BigDecimal.valueOf(1500)));
+        try{
+            System.out.println(pko.getCreditAccount("13456"));
+            System.out.println(pko.getCreditAccount("123456"));
+        } catch (AccountNotFoundException e){
+            System.out.println("Account not found");
+        }
+        System.out.println(pko.getDepositAccount("12345"));
+        pko.withdrawDepositAccount("12345", BigDecimal.valueOf(100));
+        pko.topUpDepositAccount("12345", BigDecimal.valueOf(2000));
+        pko.topUpDepositAccount("12345", BigDecimal.valueOf(30));
+        pko.transactionHistoryDepositAccount("12345");
+
     }
 }
