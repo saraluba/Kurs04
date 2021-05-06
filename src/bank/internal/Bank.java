@@ -51,6 +51,14 @@ public class Bank{
         }
     }
 
+    public void withdrawCreditAccount(String accountNumber, BigDecimal amount) {
+        for (int i = 0; i < creditAccounts.size(); i++) {
+            if(creditAccounts.get(i).getAccountNumber().equals(accountNumber)){
+                creditAccounts.get(i).withDraw(amount);
+            }
+        }
+    }
+
     public void recalculate(){
         for (DepositAccount account: depositAccounts) {
             account.recalculatePercents();
@@ -93,10 +101,27 @@ public class Bank{
         }
     }
 
+
     public void transactionHistoryCreditAccount(String accountNumber) {
         for (CreditAccount account : creditAccounts) {
             if (account.getAccountNumber().equals(accountNumber)) {
                 account.getTransactionHistory();
+            }
+        }
+    }
+
+    public void lastTransactionsDepositAccount(String accountNumber, Integer n){
+        for(DepositAccount account: depositAccounts){
+            if(account.getAccountNumber().equals(accountNumber)){
+                account.getLastTransactions(n);
+            }
+        }
+    }
+
+    public void lastTransactionsCreditAccount(String accountNumber, Integer n){
+        for(CreditAccount account: creditAccounts){
+            if(account.getAccountNumber().equals(accountNumber)){
+                account.getLastTransactions(n);
             }
         }
     }

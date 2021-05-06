@@ -27,7 +27,13 @@ public class BankApplication {
         pko.withdrawDepositAccount("12345", BigDecimal.valueOf(100));
         pko.topUpDepositAccount("12345", BigDecimal.valueOf(2000));
         pko.topUpDepositAccount("12345", BigDecimal.valueOf(30));
+        pko.topUpDepositAccount("12345", BigDecimal.valueOf(25));
         pko.transactionHistoryDepositAccount("12345");
-
+        System.out.println("================");
+        pko.lastTransactionsDepositAccount("12345", 2);
+        System.out.println("================");
+        pko.topUpCreditAccount("13456", BigDecimal.valueOf(1234));
+        pko.withdrawCreditAccount("13456", BigDecimal.valueOf(100));
+        pko.lastTransactionsCreditAccount("13456",2);
     }
 }
