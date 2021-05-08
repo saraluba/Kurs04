@@ -11,5 +11,21 @@ public class BoxDemo {
         stringBox.addItem("Hello");
         stringBox.addItem("world");
         System.out.println(stringBox.getItems());
+        System.out.println("====================");
+        Box<Toy> toyBox = new Box<>();
+        Box<Food> foodBox = new Box<>();
+        Box<Book> bookBox = new Box<>();
+        Box<Fantasy> fantasyBox = new Box<>();
+        Shelf<Toy> toyShelf = new Shelf<>();
+        toyShelf.addBox(toyBox);
+        Shelf<Book> bookShelf = new Shelf<>();
+        bookShelf.addBox(fantasyBox);
+        Shelf<Item> itemShelf = new Shelf<>();
+        itemShelf.addBox(toyBox);
+        itemShelf.addBox(foodBox);
+        itemShelf.addBox(fantasyBox);
+        itemShelf.addBox(bookBox);
+        System.out.println(itemShelf.getBoxList());
+
     }
 }
