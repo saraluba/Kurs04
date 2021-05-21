@@ -76,6 +76,7 @@ public class PersonDemo {
                 .map(person -> person.getLastName())
                 .allMatch(name -> name.contains("a"));
 
+
         System.out.println(menUnder65);
         System.out.println(womenSalary);
         System.out.println(personFromKrakowUnder18);

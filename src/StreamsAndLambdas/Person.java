@@ -1,6 +1,7 @@
 package StreamsAndLambdas;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 public class Person {
     protected String firstName;
@@ -55,5 +56,12 @@ public class Person {
                 '}';
     }
 
+    protected static String generateUserName(Person person){
+        Optional<LocalDate> dateOptional = Optional.ofNullable(person.birthDay);
+        if(dateOptional.isPresent()){
+            return person.firstName.toLowerCase().charAt(0) + person.lastName.toLowerCase() + person.birthDay.getYear();
+        }
+        return person.firstName.toLowerCase().charAt(0) + person.lastName.toLowerCase() + LocalDate.now().getYear();
+    }
 
 }
