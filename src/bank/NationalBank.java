@@ -5,13 +5,14 @@ import bank.internal.BankNotFoundException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class NationalBank {
     private static final NationalBank NATIONAL_BANK_INSTANCE = new NationalBank();
 
     private final List<Bank> banks;
 
-    private NationalBank() {
+    protected NationalBank() {
         banks = new ArrayList<>();
     }
 
@@ -24,17 +25,13 @@ public class NationalBank {
     }
 
     //TODO: implement the method
-    public Bank getByName(String name) throws BankNotFoundException{
-        Bank bank = null;
+    public Optional<Bank> getByName(String name){
+        Optional<Bank> bank = Optional.empty();
         for (int i = 0; i < banks.size(); i++) {
             if (banks.get(i).getName().equals(name)) {
-                bank = banks.get(i);
+                bank = Optional.of(banks.get(i));
             }
         }
-        if(bank.equals(null)){
-            throw new BankNotFoundException("bank doesn't exist");
-        }else{
-            return bank;
-        }
+        return bank;
     }
 }

@@ -2,6 +2,7 @@ package bank.internal;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class Bank{
     private final String name;
@@ -68,29 +69,24 @@ public class Bank{
         }
     }
 
-    public DepositAccount getDepositAccount(String accountNumber1) throws AccountNotFoundException {
-        DepositAccount account1 = null;
+    public Optional<DepositAccount> getDepositAccount(String accountNumber1) {
+        Optional<DepositAccount> account1 = Optional.empty();
         for(DepositAccount account: depositAccounts){
             if(account.getAccountNumber().equals(accountNumber1)){
-                account1 = account;
+                account1 = Optional.of(account);
             }
         }
-        if(account1.equals(null)){
-            throw new AccountNotFoundException("account doesn't exist!");
-        } else{
-            return account1;
-        }
+        return account1;
     }
 
-    public CreditAccount getCreditAccount(String accountNumber1) throws AccountNotFoundException {
+    public Optional<CreditAccount> getCreditAccount(String accountNumber1) {
+        Optional<CreditAccount> account1 = Optional.empty();
         for(CreditAccount account: creditAccounts){
             if(account.getAccountNumber().equals(accountNumber1)){
-                return account;
-            } else{
-                throw new AccountNotFoundException("That credit account doesn't exist!");
+                account1 = Optional.of(account);
             }
         }
-        return null;
+        return account1;
     }
 
     public void transactionHistoryDepositAccount(String accountNumber) {
@@ -125,8 +121,5 @@ public class Bank{
             }
         }
     }
-
-
-
 
 }
